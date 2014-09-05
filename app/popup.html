@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Shipscope</title>
+    <link rel='stylesheet' href="css/bootstrap/bootstrap.min.css">
+    <link rel='stylesheet' href="css/shipscope.css">
+  </head>
+  <body>
+    <script id='mainLayout' type='text/x-handlebars-template'>
+      {{#if false }}
+        <div id='message'>IMPORTANT MESSAGE GOES HERE (like your API Key is bad)</div>
+      {{/if}}
+
+      <nav id='nav'>
+        <span id='view_name'>fake/unboggleme{{ name }}</span>
+        <h5><a href='#'>shipscope</a></h5>
+      </nav>
+
+      <section id='main'>
+        <div id='project_list'></div>
+      </section>
+      <footer>
+        <button type='button' class='btn btn-link btn-xs pull-right'>options</button>
+      </footer>
+    </script>
+
+
+    <!-- Build Item -->
+    <script id='build_item' type='text/x-handlebars-template'>
+      <div class='branch_info'>
+        <a target='codeship' href='http://www.codeship.io/projects/{{projectId}}/builds/{{id}}'>
+          <div class='branch_name'><strong>{{ branch }}</strong></div>
+        </a>
+        <div class='commit_message'>{{ message }}</div>
+      </div>
+      <div class='branch_status'>
+        <a class='build_status' href='#' data-id='{{ id }}' title='Restart this build'>
+          <span class='glyphicon glyphicon-repeat alert-{{ getStatusIcon }}'></span>
+        </a>
+      </div>
+    </script>
+
+    <!-- Project Item -->
+    <script id='project_item' type='text/x-handlebars-template'>
+      {{ repository_name }}
+      <span class='badge alert-{{ getStatus }}' data-id='{{ id }}'>{{ builds.length }}</span>
+    </script>
+
+    <!-- Empty Projects View -->
+    <script id='empty_projects_view' type='text/x-handlebars-template'>
+      <div class="well well-sm">There are no projects or no network is available.</div>
+    </script>
+
+    <!-- Options -->
+    <script id='options_view' type='text/x-handlebars-template'>
+      {{#if new_user}}
+      {{/if}}
+
+      <form role='form'>
+        <div class='form-group {{ hasError }}'>
+          <label for='api_key' class='control-label'><strong>Codeship API Key</strong></label>
+          <textarea id='api_key' class='form-control' rows='2' placeholder='Paste your Codeship API Key' autofocus>{{ api_key }}</textarea>
+          <span class='help-block'>Copy your API Key from <a target='codeship' href='http://www.codeship.io/user/edit'>your Codeship account.</a></span>
+        </div>
+        <div class='form-group pull-right'>
+          <button id='options_submit' type="submit" class='btn btn-primary btn-xs'>Save</button>
+        </div>
+      </form>
+    </script>
+
+
+    <script src='lib/jquery.min.js'></script>
+    <script src='lib/underscore.js'></script>
+    <script src='lib/handlebars.js'></script>
+    <script src='lib/backbone.js'></script>
+    <script src='lib/backbone.wreqr.min.js'></script>
+    <script src='lib/backbone.babysitter.min.js'></script>
+    <script src='lib/backbone.marionette.js'></script>
+    <script src='lib/bootstrap.min.js'></script>
+
+    <script src='js/util/ga.js'></script>
+    <script src='js/models/project.js'></script>
+    <script src='js/models/build.js'></script>
+    <script src='js/models/options.js'></script>
+    <script src='js/collections/projects.js'></script>
+    <script src='js/collections/builds.js'></script>
+
+    <script src='js/views/build.js'></script>
+    <script src='js/views/builds.js'></script>
+    <script src='js/views/project.js'></script>
+    <script src='js/views/projects.js'></script>
+    <script src='js/views/options.js'></script>
+    <script src='js/views/main.js'></script>
+
+    <script src='js/app.js'></script>
+  </body>
+</html>
+

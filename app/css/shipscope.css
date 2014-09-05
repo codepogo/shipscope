@@ -1,0 +1,141 @@
+body {
+  width: 350px;
+}
+
+nav {
+  position: relative;
+  height: 35px;
+}
+
+nav h5 {
+  position: absolute;
+  left: 0;
+  right: auto;
+  display: inline-block;
+  transition: all 2s ease;
+}
+
+nav h5 a, nav h5 a:focus, nav h5 a:hover {
+  text-decoration: none;
+  cursor: default;
+  color: rgb(34,34,34);
+}
+
+nav h5 a:focus {
+  outline: none;
+}
+
+nav span {
+  display: none;
+  opacity: 0;
+  transition: opacity 2s;
+}
+
+nav.project_view h5 {
+  right: 0;
+  left: auto;
+  transition: all 2s ease;
+}
+
+nav.project_view h5 a {
+  cursor: pointer;
+  text-decoration: none;
+  color: #008cba;
+}
+
+nav.project_view span {
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 11px;
+  line-height: 1.1;
+  opacity: 1;
+  transition: opacity 2s;
+}
+
+body > div {
+  padding: 0 10px;
+}
+
+div#project_list a {
+  cursor: pointer;
+}
+
+#project_list .list-group {
+  margin-bottom: 10px;
+}
+
+.list-group {
+  max-height: 450px;
+  overflow-y: scroll;
+}
+
+footer {
+  height: 20px;
+  margin-bottom: 10px;
+}
+
+footer .btn-link:focus {
+  outline: none;
+  color: #008cba;
+  text-decoration: none;
+}
+
+div.branch_info {
+  display: inline-block;
+}
+
+div.branch_info a {
+  color: rgb(34,34,34);
+}
+
+div.branch_info a:hover {
+  text-decoration: none;
+  color: #008cba;
+}
+
+
+
+div.branch_info .commit_message {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+div.branch_status {
+  display: inline-block;
+  float: right;
+}
+
+div.branch_status span.glyphicon-repeat {
+  padding: 6px;
+  border-radius: 12px;
+}
+
+form {
+  margin-top: 15px;
+}
+
+span.glyphicon-repeat.alert-info {
+  -webkit-animation: spinner linear infinite 1s;
+}
+
+@-webkit-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  25% {
+    -webkit-transform: rotate(90deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+  }
+  75% {
+    -webkit-transform: rotate(270deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+

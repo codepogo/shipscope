@@ -1,0 +1,26 @@
+{
+  "manifest_version": 2,
+
+  "name": "Shipscope",
+  "description": "Monitor Codeship projects and builds.",
+  "version": "0.9.5",
+  "icons": {
+    "48": "img/shipscope_icon_48.png",
+    "128": "img/shipscope_icon_128.png"
+  },
+  "permissions": [
+    "notifications",
+    "storage",
+    "https://www.codeship.io/",
+    "http://fonts.googleapis.com/"
+    ],
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": "img/shipscope_icon_19.png",
+    "default_title": "Shipscope",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com 'unsafe-eval'; object-src 'self';"
+}
