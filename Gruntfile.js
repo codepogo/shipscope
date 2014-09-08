@@ -17,7 +17,7 @@ module.exports = function(grunt) {
         },
         expand: true,
         cwd: './app/',
-        src: [ '*.html', 'manifest.json', 'css/**/*', 'img/**/*.png', 'js/**/*', 'lib/**/*' ],
+        src: [ '*.html', 'manifest.json', 'css/**/*', 'img/**/*.png', 'js/**/*', 'lib/**/*', '_locales/**/*' ],
       }
     }
   })
