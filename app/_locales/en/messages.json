@@ -1,0 +1,30 @@
+{
+  "Shipscope": {
+    "message": "Shipscope",
+    "description": "app title"
+  },
+  "no_projects": {
+    "message": "There are no projects or no network is available.",
+    "description": "indicates that the account has no Codeship projects or that there was a network error"
+  },
+  "options": {
+    "message": "Options",
+    "description": "label for the Options panel"
+  },
+  "paste_api_key": {
+    "message": "Paste your Codeship API Key",
+    "description": "placeholder text to paste your api key from your clipboard"
+  },
+  "codeship_api_key": {
+    "message": "Codeship API Key",
+    "description": "do not translate"
+  },
+  "copy_api_key": {
+    "message": "Copy your API Key from your Codeship account",
+    "description": "help in Options panel"
+  },
+  "save": {
+    "message": "Save",
+    "description": "label for Save button"
+  }
+}

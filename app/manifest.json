@@ -1,7 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "Shipscope",
+  "name": "__MSG_Shipscope__",
+  "default_locale": "en",
   "description": "Monitor Codeship projects and builds.",
   "version": "0.9.5",
   "icons": {

@@ -4,7 +4,15 @@ var OptionsView = Backbone.Marionette.LayoutView.extend({
   template: '#options_view',
 
   templateHelpers: function() {
-    return { hasError: this.hasError ? 'has-error' : ''}
+    return {
+      msg: {
+        save: chrome.i18n.getMessage('save'),
+        codeship_api_key: chrome.i18n.getMessage('codeship_api_key'),
+        copy_api_key: chrome.i18n.getMessage('copy_api_key'),
+        paste_api_key: chrome.i18n.getMessage('paste_api_key'),
+      },
+      hasError: this.hasError ? 'has-error' : ''
+    }
   },
 
   events: {
