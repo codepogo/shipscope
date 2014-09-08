@@ -12,7 +12,7 @@
     "description": "label for the Options panel"
   },
   "paste_api_key": {
-    "message": "Fügen Sie ihren Codeship API Key",
+    "message": "Einfügen Sie ihren Codeship API Key",
     "description": "placeholder text to paste your api key from your clipboard"
   },
   "codeship_api_key": {
