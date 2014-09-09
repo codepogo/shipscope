@@ -6,6 +6,13 @@ var ProjectsView = Backbone.Marionette.CollectionView.extend({
   childView: ProjectView,
   emptyView: EmptyView,
   className: 'list-group',
+
+  templateHelpers: {
+    msg: {
+      no_projects: chrome.i18n.getMessage('no_projects')
+    }
+  },
+
   events: {
     'click a': 'onClick'
   },

@@ -47,7 +47,7 @@ var MainLayout = Backbone.Marionette.LayoutView.extend({
   onShowOptions: function() {
     this.options.once('sync', this.onShowOptions);
     $('nav').addClass('project_view');
-    $('nav span').text('Options');
+    $('nav span').text(chrome.i18n.getMessage('options'));
     $('footer').hide();
 
     this.optionsView = new OptionsView({model: this.options});

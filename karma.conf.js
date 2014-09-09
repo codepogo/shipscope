@@ -17,6 +17,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'test/unit/setup.js',
+
       'app/lib/jquery.min.js',
       'app/lib/bootstrap.js',
       'app/lib/bootstrap.min.js',
