@@ -5,6 +5,12 @@ var MainLayout = Backbone.Marionette.LayoutView.extend({
     project_list: '#project_list'
   },
 
+  templateHelpers: {
+    msg: {
+      options_link: chrome.i18n.getMessage('options')
+    }
+  },
+
   events: {
     'click nav h5 a': 'onShowHome',
     'click footer button': 'onShowOptions'

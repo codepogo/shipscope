@@ -20,7 +20,7 @@
         <div id='project_list'></div>
       </section>
       <footer>
-        <button type='button' class='btn btn-link btn-xs pull-right'>options</button>
+        <button type='button' class='btn btn-link btn-xs pull-right'>{{ msg.options_link }}</button>
       </footer>
     </script>
 
@@ -34,7 +34,7 @@
         <div class='commit_message'>{{ message }}</div>
       </div>
       <div class='branch_status'>
-        <a class='build_status' href='#' data-id='{{ id }}' title='Restart this build'>
+        <a class='build_status' href='#' data-id='{{ id }}' title='{{ msg.restart_build }}'>
           <span class='glyphicon glyphicon-repeat alert-{{ getStatusIcon }}'></span>
         </a>
       </div>

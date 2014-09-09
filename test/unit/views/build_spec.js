@@ -3,13 +3,18 @@ describe('Build View', function() {
 
   var build, view
 
+  before(function() {
+    chrome.i18n = {
+      getMessage: function() { return 'STUBBED' }
+    }
+  })
+
   beforeEach(function() {
     // var parent = document.createElement('div')
     // parent.id = 'build_item'
     // document.body.appendChild(parent)
     // console.debug(document.body)
     //
-
     build = new Build(ProjectFixtures.good.builds[0])
     view = new BuildView({model: build, projectId: 12345})
     // view.render()
@@ -50,10 +55,10 @@ describe('Build View', function() {
     })
   })
 
-  // it('should render when the status of a build changes', function() {
-  //   sinon.stub(view, 'onStatusChange')
-  //   build.set({status: 'testing'})
-  //
-  //   view.onStatusChange.calledOnce.should.be.true
-  // })
+  xit('should render when the status of a build changes', function() {
+    sinon.stub(view, 'onStatusChange')
+    build.set({status: 'testing'})
+
+    view.onStatusChange.calledOnce.should.be.true
+  })
 })

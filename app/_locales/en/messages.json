@@ -26,5 +26,9 @@
   "save": {
     "message": "Save",
     "description": "label for Save button"
+  },
+  "restart_build": {
+    "message": "Restart this build",
+    "description": "a button which allows a build to be restarted"
   }
 }

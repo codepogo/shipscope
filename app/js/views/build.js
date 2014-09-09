@@ -8,6 +8,9 @@ var BuildView = Backbone.Marionette.ItemView.extend({
 
   templateHelpers: function() {
     return {
+      msg: {
+        restart_build: chrome.i18n.getMessage('restart_build')
+      },
       getStatusIcon: function() {
         var STATES = {
           stopped: 'warning',
