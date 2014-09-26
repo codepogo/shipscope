@@ -20,13 +20,12 @@ module.exports = function(config) {
       'test/unit/setup.js',
 
       'app/lib/jquery.min.js',
-      'app/lib/bootstrap.js',
       'app/lib/bootstrap.min.js',
-      'app/lib/underscore.js',
-      'app/lib/backbone.js',
+      'app/lib/underscore-min.js',
+      'app/lib/backbone-min.js',
       'app/lib/backbone.babysitter.min.js',
       'app/lib/backbone.wreqr.min.js',
-      'app/lib/backbone.marionette.js',
+      'app/lib/backbone.marionette.min.js',
       'app/lib/handlebars.js',
 
       'app/popup.html',
