@@ -20,7 +20,7 @@ module.exports = function(grunt) {
     compress: {
       main: {
         options: {
-          archive: 'deploy/shipscope_v' + manifest.version + '.zip'
+          archive: 'deploy/shipscope.zip'
         },
         expand: true,
         cwd: './app/',
