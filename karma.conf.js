@@ -28,7 +28,6 @@ module.exports = function(config) {
       'app/lib/backbone.marionette.min.js',
       'app/lib/handlebars.js',
 
-      'app/popup.html',
 
       'app/js/models/build.js',
       'app/js/models/project.js',
