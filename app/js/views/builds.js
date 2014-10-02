@@ -1,5 +1,15 @@
+var EmptyBuildsView = Backbone.Marionette.ItemView.extend({
+  template: '#empty_builds_view',
+  templateHelpers: {
+    msg: {
+      no_builds: chrome.i18n.getMessage('no_builds')
+    }
+  }
+});
+
 var BuildsView = Backbone.Marionette.CollectionView.extend({
   childView: BuildView,
+  emptyView: EmptyBuildsView,
   className: 'list-group',
   events: {
     'click a.build_status': 'onClick'

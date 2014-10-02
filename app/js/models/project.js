@@ -13,9 +13,13 @@ var Project = Backbone.Model.extend({
       }
     })
 
-    projectStatus = _.reduce(mostRecentBuilds, function(previous, current) {
-      return Math.max(previous, current)
-    })
+    if (Object.keys(mostRecentBuilds).length == 0) {
+      projectStatus = Build.STATES.success
+    } else {
+      projectStatus = _.reduce(mostRecentBuilds, function(previous, current) {
+        return Math.max(previous, current)
+      })
+    }
 
     return {
       count: Object.keys(mostRecentBuilds).length,

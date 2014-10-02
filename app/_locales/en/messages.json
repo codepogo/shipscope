@@ -7,6 +7,10 @@
     "message": "There are no projects or no network is available.",
     "description": "indicates that the account has no Codeship projects or that there was a network error"
   },
+  "no_builds": {
+    "message": "There are no builds for this project.",
+    "description": "indicates that the selected project has not run any builds on Codeship yet"
+  },
   "options": {
     "message": "Options",
     "description": "label for the Options panel"
