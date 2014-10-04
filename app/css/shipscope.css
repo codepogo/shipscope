@@ -61,6 +61,10 @@ div#project_list a {
   cursor: pointer;
 }
 
+#project_list .commit_message {
+  cursor: default;
+}
+
 #project_list .list-group {
   margin-bottom: 10px;
 }
