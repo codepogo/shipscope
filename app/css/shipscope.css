@@ -125,6 +125,7 @@ form {
 
 span.glyphicon-repeat.alert-info {
   -webkit-animation: spinner linear infinite 1s;
+  cursor: default;
 }
 
 @-webkit-keyframes spinner {
