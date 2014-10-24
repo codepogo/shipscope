@@ -52,7 +52,7 @@ var ProjectsView = Backbone.Marionette.CollectionView.extend({
   },
 
   onClick: function(event) {
-    var info = event.currentTarget.querySelector('span')
+    var info = event.currentTarget.querySelector('span[data-id]')
     var projectId = info.dataset.id
 
     ga('send', 'event', 'popup', 'project', 'select')

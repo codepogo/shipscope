@@ -25,6 +25,7 @@ describe('Project View', function() {
 
     it('should provide the project status for a successful build', function() {
       project.attributes.builds[0].status = 'error'
+      project.attributes.builds[0].branch = 'master'
       var p = view.serializeData()
       var status = view.templateHelpers.getStatus.bind(p)()
 
@@ -33,6 +34,7 @@ describe('Project View', function() {
 
     it('should provide the project status for a successful build', function() {
       project.attributes.builds[0].status = 'testing'
+      project.attributes.builds[0].branch = 'master'
       var p = view.serializeData()
       var status = view.templateHelpers.getStatus.bind(p)()
 

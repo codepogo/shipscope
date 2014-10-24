@@ -61,8 +61,21 @@ div#project_list a {
   cursor: pointer;
 }
 
+#project_list .commit_message {
+  cursor: default;
+}
+
 #project_list .list-group {
   margin-bottom: 10px;
+}
+
+#project_list .list-group-item .repo_name {
+  display: inline-block;
+  width: 270px;
+}
+
+#project_list .list-group-item .badge {
+  display: inline-block;
 }
 
 .list-group {
@@ -113,12 +126,19 @@ div.branch_status span.glyphicon-repeat {
   border-radius: 12px;
 }
 
+.glyphicon-chevron-right {
+  padding: 6px;
+  border-radius: 12px;
+  vertical-align: top;
+}
+
 form {
   margin-top: 15px;
 }
 
 span.glyphicon-repeat.alert-info {
   -webkit-animation: spinner linear infinite 1s;
+  cursor: default;
 }
 
 @-webkit-keyframes spinner {

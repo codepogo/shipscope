@@ -22,8 +22,10 @@ var BuildsView = Backbone.Marionette.CollectionView.extend({
       build = this.collection.get(id);
 
     if (build) {
-      ga('send', 'event', 'popup', 'build_restart', 'request')
-      build.restart();
+      if (build.get('status') != 'testing') {
+        ga('send', 'event', 'popup', 'build_restart', 'request')
+        build.restart();
+      }
     } else {
       console.warn('could not find build:', id);
     }
