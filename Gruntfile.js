@@ -62,4 +62,5 @@ module.exports = function(grunt) {
 
   grunt.registerTask('test', ['clean', 'uglify', 'karma'])
   grunt.registerTask('build', ['clean', 'uglify', 'compress'])
+  grunt.registerTask('default', ['build'])
 }
