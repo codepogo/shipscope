@@ -107,9 +107,7 @@ div.branch_info a:hover {
   color: #008cba;
 }
 
-
-
-div.branch_info .commit_message {
+div.branch_info .commit_message, div.branch_info .branch_name {
   width: 250px;
   white-space: nowrap;
   overflow: hidden;
