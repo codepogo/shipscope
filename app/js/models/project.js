@@ -4,25 +4,17 @@ var Project = Backbone.Model.extend({
   getStatus: function() {
     var
       builds = new Builds(this.attributes.builds),
-      mostRecentBuilds = {}
-      projectStatus = 0
+      mostRecentBuilds = {},
+      projectStatus = Build.STATES.success;
 
-    builds.each(function(item, index, list) {
-      if (mostRecentBuilds[item.attributes.branch] == undefined) {
-        mostRecentBuilds[item.attributes.branch] = item.getStatus()
+    if (builds.length > 0) {
+      var lastMasterBuild = builds.findWhere({branch: 'master'})
+      if (lastMasterBuild) {
+        projectStatus = lastMasterBuild.getStatus()
       }
-    })
-
-    if (Object.keys(mostRecentBuilds).length == 0) {
-      projectStatus = Build.STATES.success
-    } else {
-      projectStatus = _.reduce(mostRecentBuilds, function(previous, current) {
-        return Math.max(previous, current)
-      })
     }
 
     return {
-      count: Object.keys(mostRecentBuilds).length,
       status: projectStatus
     }
   }
