@@ -42,8 +42,9 @@
 
     <!-- Project Item -->
     <script id='project_item' type='text/x-handlebars-template'>
-      {{ repository_name }}
-      <span class='badge alert-{{ getStatus }}' data-id='{{ id }}'></span>
+      <span class='repo_name'>{{ repository_name }}</span>
+      <span class='glyphicon glyphicon-chevron-right alert-{{ getStatus }}' data-id='{{ id }}'>
+      </span>
     </script>
 
     <!-- Empty Projects View -->
