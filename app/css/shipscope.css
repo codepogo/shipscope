@@ -69,10 +69,13 @@ div#project_list a {
   margin-bottom: 10px;
 }
 
+#project_list .list-group-item .repo_name {
+  display: inline-block;
+  width: 270px;
+}
+
 #project_list .list-group-item .badge {
   display: inline-block;
-  width: 20px;
-  height: 20px;
 }
 
 .list-group {
@@ -121,6 +124,12 @@ div.branch_status {
 div.branch_status span.glyphicon-repeat {
   padding: 6px;
   border-radius: 12px;
+}
+
+.glyphicon-chevron-right {
+  padding: 6px;
+  border-radius: 12px;
+  vertical-align: top;
 }
 
 form {
