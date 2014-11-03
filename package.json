@@ -1,6 +1,6 @@
 {
   "name": "shipscope",
-  "version": "0.0.1",
+  "version": "1.0.11",
   "description": "Monitor Codeship projects and builds",
   "main": "index.js",
   "scripts": {
