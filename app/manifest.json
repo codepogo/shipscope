@@ -4,7 +4,7 @@
   "name": "__MSG_Shipscope__",
   "default_locale": "en",
   "description": "Monitor Codeship projects and builds.",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "icons": {
     "48": "img/shipscope_icon_48.png",
     "128": "img/shipscope_icon_128.png"
@@ -13,6 +13,7 @@
     "notifications",
     "storage",
     "https://www.codeship.io/",
+    "https://codeship.com/",
     "http://fonts.googleapis.com/"
     ],
   "background": {

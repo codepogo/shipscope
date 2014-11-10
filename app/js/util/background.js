@@ -2,7 +2,7 @@ var Background = function() {
   var
     POLLING_INTERVAL = 10000,
     ANALYTICS_INTERVAL = 60000,
-    CODESHIP_URL = 'https://www.codeship.io/api/v1/projects.json',
+    CODESHIP_URL = 'https://codeship.com/api/v1/projects.json',
     FAKE_URL = 'https://localhost:6060/projects.json',
     URL = CODESHIP_URL,
 
