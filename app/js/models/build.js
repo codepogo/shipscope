@@ -2,7 +2,7 @@ var Build = Backbone.Model.extend({
   tagName: 'li',
 
   restart: function() {
-    var restartUrl = 'https://www.codeship.io/api/v1/builds/' + this.id + '/restart.json'
+    var restartUrl = 'https://codeship.com/api/v1/builds/' + this.id + '/restart.json'
 
     $.post(restartUrl, App.options)
       .done(function() {

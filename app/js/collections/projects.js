@@ -1,6 +1,5 @@
 var Projects = Backbone.Collection.extend({
   model: Project,
-  url: 'https://www.codeship.io/api/v1/projects.json?api_key=',
   apiKey: null,
 
   initialize: function(models, options) {
