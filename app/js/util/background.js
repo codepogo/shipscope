@@ -72,7 +72,8 @@ var Background = function() {
 
         $.getJSON(URL, params)
           .done( function(response) {
-            projects = new Projects(response.projects)
+            var filtered = _.filter(response.projects, function(p) { return p.repository_name != null } )
+            projects = new Projects(filtered)
             buildWatcher.scan(response.projects)
             getShipscopeSummary()
             if (intercom) intercom.postMessage({type: 'api_ok'})
