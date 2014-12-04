@@ -38,3 +38,13 @@ Install it from the [Chrome Web Store](https://chrome.google.com/webstore/detail
 1. Select the folder containing: `codeship/app`
 
 The Shipscope icon should appear in your menu bar.
+
+## Contributing
+
+see [CONTRIBUTING.md](https://github.com/codeship/shipscope/blob/master/CONTRIBUTING.md)
+
+## License
+
+Copyright (c) 2014 David McGaffin
+
+see [LICENSE](https://github.com/codeship/shipscope/blob/master/LICENSE)
