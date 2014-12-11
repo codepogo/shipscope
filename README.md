@@ -16,10 +16,10 @@ Install it from the [Chrome Web Store](https://chrome.google.com/webstore/detail
 ## Development
 
 ### Codeship Build Status
-[![Codeship Status for codepogo/shipscope](https://codeship.com/projects/65d07f70-1760-0132-b253-1a9c2abd41b7/status) ](https://codeship.com/projects/34082)
+[![Codeship Status for codeship/shipscope](https://codeship.com/projects/65d07f70-1760-0132-b253-1a9c2abd41b7/status) ](https://codeship.com/projects/34082)
 
 ### Features/Bugs
-[![Stories in Ready](https://badge.waffle.io/codepogo/shipscope.png?label=ready&title=Ready)](https://waffle.io/codepogo/shipscope)
+[![Stories in Ready](https://badge.waffle.io/codeship/shipscope.png?label=ready&title=Ready)](https://waffle.io/codeship/shipscope)
 
 ### Prerequisites
 
