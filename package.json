@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:mcgaffin/shipscope.git"
+    "url": "git@github.com:codeship/shipscope.git"
   },
   "author": "David McGaffin",
   "license": "ISC",
