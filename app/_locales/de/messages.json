@@ -4,11 +4,11 @@
     "description": "app title"
   },
   "no_projects": {
-    "message": "Entweder gibt es keine Projekte oder kein Netz verfügbar.",
+    "message": "Keine Projekte oder kein Netzwerk verfügbar.",
     "description": "indicates that the account has no Codeship projects or that there was a network error"
   },
   "no_builds": {
-    "message": "There are no builds for this project.",
+    "message": "Zu diesem Projekt gibt es noch keine Builds.",
     "description": "indicates that the selected project has not run any builds on Codeship yet"
   },
   "options": {
@@ -16,7 +16,7 @@
     "description": "label for the Options panel"
   },
   "paste_api_key": {
-    "message": "Einfügen Sie ihren Codeship API Key",
+    "message": "Füge deinen Codeship API Key ein.",
     "description": "placeholder text to paste your api key from your clipboard"
   },
   "codeship_api_key": {
@@ -24,7 +24,7 @@
     "description": "do not translate"
   },
   "copy_api_key": {
-    "message": "Kopieren Sie ihren Codeship API Key von ihrem Codeship Account",
+    "message": "Kopiere den API Key von deinem Codeship Account.",
     "description": "help in Options panel"
   },
   "save": {
