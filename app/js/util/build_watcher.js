@@ -10,21 +10,29 @@ var BuildWatcher = (function() {
     },
 
     onCreateNotification = function(notificationId) {
-      if (!notificationId) {
+      if (notificationId) {
+        setTimeout(function() {
+            chrome.notifications.clear(notificationId, function(wasCleared) {})
+          }, 5000)
+      } else {
         console.error('runtime error:', chrome.runtime.lastError)
       }
+    },
+
+    clearNotification = function(notificationId) {
+      delete isWatching[notificationId]
     },
 
     onNotificationClicked = function(notificationId) {
       var build = isWatching[notificationId]
       if (build) {
         chrome.tabs.create({url: 'https://codeship.com/projects/' + build.project_id + '/builds/' + build.id})
-        delete isWatching[notificationId]
+        clearNotification(notificationId)
       } else console.debug('could not find build for notificationId:', notificationId)
     },
 
     onNotificationClosed = function(notificationId) {
-      delete isWatching[notificationId]
+      clearNotification(notificationId)
     },
 
     showNotification = function(project, build) {
