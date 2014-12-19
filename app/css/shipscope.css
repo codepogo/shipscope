@@ -157,3 +157,18 @@ span.glyphicon-repeat.alert-info {
   }
 }
 
+.alert-warning {
+  background-color: #feb71a;
+}
+
+.alert-success {
+  background-color: #60cc69;
+}
+
+.alert-danger {
+  background-color: #fe402c;
+}
+
+.alert-info {
+  background-color: #5a95e5;
+}

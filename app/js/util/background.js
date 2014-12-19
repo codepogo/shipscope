@@ -87,7 +87,10 @@ var Background = function() {
 
     getShipscopeSummary = function() {
       var STATUS_COLORS = [
-        '#ff7f00', '#0b0', '#f00', '#00f'
+        '#feb71a',    // stopped
+        '#60cc69',    // success
+        '#fe402c',    // error
+        '#5a95e5'     // testing
       ]
 
       var status = projects.getSummary()
