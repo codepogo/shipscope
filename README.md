@@ -1,3 +1,6 @@
+![Shipscope by Codeship](/webstore/logo_shipscope_colour-07.png)
+
+
 # Shipscope
 
 Shipscope is a Chrome browser extension that monitors your projects on [Codeship](https://codeship.com). It provides the following features:
