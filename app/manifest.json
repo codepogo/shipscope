@@ -20,12 +20,6 @@
   "background": {
     "page": "background.html"
   },
-  "options_page": "options.html",
-  "options_ui": {
-    "page": "options.html",
-    "chrome_style": true,
-    "open_in_tab": false
-  },
   "browser_action": {
     "default_icon": "img/shipscope_icon_19.png",
     "default_title": "Shipscope",
