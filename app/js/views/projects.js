@@ -58,4 +58,4 @@ var ProjectsView = Backbone.Marionette.CollectionView.extend({
     ga('send', 'event', 'popup', 'project', 'select')
     Backbone.Events.trigger('show:project', projectId)
   },
-});
+})

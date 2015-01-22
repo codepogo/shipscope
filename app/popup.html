@@ -7,10 +7,6 @@
   </head>
   <body>
     <script id='mainLayout' type='text/x-handlebars-template'>
-      {{#if false }}
-        <div id='message'>IMPORTANT MESSAGE GOES HERE (like your API Key is bad)</div>
-      {{/if}}
-
       <nav id='nav'>
         <span id='view_name'>fake/unboggleme{{ name }}</span>
         <h5><a href='#'>shipscope</a></h5>
@@ -19,9 +15,6 @@
       <section id='main'>
         <div id='project_list'></div>
       </section>
-      <footer>
-        <button type='button' class='btn btn-link btn-xs pull-right'>options</button>
-      </footer>
     </script>
 
 
@@ -47,6 +40,17 @@
       </span>
     </script>
 
+    <!-- Project Selection View -->
+    <script id='select_project_item' type='text/x-handlebars-template'>
+      <span class='checkbox'>
+        <label>
+          <input type='checkbox' checked='{{ active }}' data-size='mini' data-inverse='true'
+            data-on-color='success' data-animate='false' value='{{ id }}'>
+          {{ repository_name }}
+        </label>
+      </span>
+    </script>
+
     <!-- Empty Projects View -->
     <script id='empty_projects_view' type='text/x-handlebars-template'>
       <div class="well well-sm">{{ msg.no_projects }}</div>
@@ -56,24 +60,6 @@
     <script id='empty_builds_view' type='text/x-handlebars-template'>
       <div class="well well-sm">{{ msg.no_builds }}</div>
     </script>
-
-    <!-- Options -->
-    <script id='options_view' type='text/x-handlebars-template'>
-      {{#if new_user}}
-      {{/if}}
-
-      <form role='form'>
-        <div class='form-group {{ hasError }}'>
-          <label for='api_key' class='control-label'><strong>{{ msg.codeship_api_key }}</strong></label>
-          <textarea id='api_key' class='form-control' rows='2' placeholder='{{ msg.paste_api_key }}' autofocus>{{ api_key }}</textarea>
-          <span class='help-block'>{{ msg.copy_api_key }}</span>
-        </div>
-        <div class='form-group pull-right'>
-          <button id='options_submit' type="submit" class='btn btn-primary btn-xs'>{{ msg.save }}</button>
-        </div>
-      </form>
-    </script>
-
 
     <script src='lib/jquery.min.js'></script>
     <script src='lib/underscore-min.js'></script>

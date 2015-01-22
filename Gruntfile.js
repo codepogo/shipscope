@@ -41,6 +41,13 @@ module.exports = function(grunt) {
             'app/js/views/**/*.js',
             'app/js/app.js',
           ],
+          'app/dest/shipscope-options.min.js': [
+            'app/js/models/**/*.js',
+            'app/js/collections/**/*.js',
+            'app/js/views/**/*.js',
+            'app/js/options_layout.js',
+            'app/js/options.js',
+          ],
           'app/dest/shipscope-background.min.js': [
             'app/js/util/ga.js',
             'app/js/util/build_watcher.js',

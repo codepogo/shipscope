@@ -3,8 +3,8 @@ var Background = function() {
     POLLING_INTERVAL = 10000,
     ANALYTICS_INTERVAL = 60000,
     CODESHIP_URL = 'https://codeship.com/api/v1/projects.json',
-    FAKE_URL = 'https://localhost:6060/projects.json',
-    URL = CODESHIP_URL,
+    FAKE_URL = 'http://localhost:8080/projects_fake.json',
+    URL = FAKE_URL,
 
     buildWatcher,
     pollingInterval,
@@ -26,7 +26,7 @@ var Background = function() {
 
         intercom.onMessage.addListener(function(msg) {
           if (msg.type == 'options.set') {
-            options = msg.data;
+            options = {options: msg.data};
             chrome.storage.sync.set(options, function() {
               if (chrome.runtime.lastError) {
                 console.error('ERROR setting options:', options, '=>', chrome.runtime.lastError.message);
@@ -52,9 +52,15 @@ var Background = function() {
     },
 
     fetchApiKeyFromLocalStorage = function() {
-      chrome.storage.sync.get('api_key', function(value) {
-        options = value
-        if (options) fetchProjectsFromCodeship()
+      chrome.storage.sync.get('options', function(value) {
+        if (value) {
+          options = value.options
+          if (options) {
+            fetchProjectsFromCodeship()
+          } else {
+            chrome.tabs.create({url: 'chrome://extensions/?options=' + chrome.runtime.id})
+          }
+        }
       });
     },
 
