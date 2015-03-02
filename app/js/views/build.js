@@ -14,6 +14,8 @@ var BuildView = Backbone.Marionette.ItemView.extend({
           success: 'success',
           error: 'danger',
           testing: 'info',
+          blocked: 'danger',
+          infrastructure_failure: 'danger',
         }
         return STATES[this.status];
       },
