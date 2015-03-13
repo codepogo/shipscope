@@ -1,6 +1,6 @@
 describe('BuildWatcher', function() {
   'use strict'
-  var watcher, projects
+  var watcher, projects, buildsCollection, projectsCollection
 
   before(function() {
     chrome = {
@@ -17,22 +17,40 @@ describe('BuildWatcher', function() {
   })
 
   it('ignores any builds that are not testing', function() {
-    projects = [ProjectFixtures.good, ProjectFixtures.good2]
-    watcher.scan(projects)
+    buildsCollection = new Builds(BuildFixtures.good)
+    projectsCollection = new Projects([ProjectFixtures.good, ProjectFixtures.good2])
+
+    projectsCollection.each(function(project) {
+      project.set({builds: buildsCollection})
+    })
+
+    watcher.scan(projectsCollection)
     watcher.getWatchList().should.eql({})
   })
 
   it('remembers builds that are testing', function() {
-    projects = [ProjectFixtures.good, ProjectFixtures.testing]
-    watcher.scan(projects)
-    watcher.getWatchList().should.eql({"2f406670-007f-0132-cb2f-5247614ee66f": ProjectFixtures.testing.builds[0]})
+    buildsCollection = new Builds(BuildFixtures.testing)
+    projectsCollection = new Projects([ProjectFixtures.good, ProjectFixtures.good2])
+
+    projectsCollection.each(function(project) {
+      project.set({builds: buildsCollection})
+    })
+
+    watcher.scan(projectsCollection)
+    watcher.getWatchList().should.eql({"2f406670-007f-0132-cb2f-5247614ee66f": BuildFixtures.testing[0]})
   })
 
   describe('notifications', function() {
     var alertOptions
 
     beforeEach(function() {
-      projects = [ProjectFixtures.good, ProjectFixtures.testing]
+      buildsCollection = new Builds(BuildFixtures.testing)
+      projectsCollection = new Projects([ProjectFixtures.good, ProjectFixtures.good2])
+
+      projectsCollection.each(function(project) {
+        project.set({builds: buildsCollection})
+      })
+
       alertOptions = {
         type: "basic",
         title: "shipscope",
@@ -40,7 +58,6 @@ describe('BuildWatcher', function() {
         priority: 1,
         iconUrl: "img/shipscope_icon48.png"
       }
-      projects[1].builds[0].status = 'testing'
 
       sinon.spy(chrome.notifications, 'create')
     })

@@ -1,9 +1,14 @@
 describe('Projects', function() {
   'use strict'
-  var projects
+  var projects, builds
 
   beforeEach(function() {
-    projects = new Projects([ProjectFixtures.good, ProjectFixtures.bad])
+    projects = new Projects([ProjectFixtures.good, ProjectFixtures.good2])
+    builds = new Builds(BuildFixtures.error)
+
+    projects.each(function(project) {
+      project.set({builds: builds})
+    })
   })
 
   it('should have loaded both projects correctly', function() {
