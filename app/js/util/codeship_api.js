@@ -26,8 +26,8 @@ var CodeshipApi = (function() {
 
       $.getJSON(BUILD_URL, params)
         .done( function(response) {
-          builds_collection = new Builds(response.builds)
-          callback(builds_collection)
+          buildsCollection = new Builds(response.builds)
+          callback(buildsCollection)
         })
         .fail(function(err) {
           ga('send', 'event', 'background', 'fetch_builds', 'error')
@@ -40,8 +40,8 @@ var CodeshipApi = (function() {
         var params = 'api_key=' + options.api_key
         $.getJSON(PROJECT_URL, params)
           .done( function(response) {
-            projects_collection = new Projects(response.projects)
-            callback(projects_collection)
+            projectsCollection = new Projects(response.projects)
+            callback(projectsCollection)
           })
           .fail(function(err) {
             ga('send', 'event', 'background', 'fetch_projects', 'error')
