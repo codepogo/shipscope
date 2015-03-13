@@ -11,7 +11,6 @@ var Project = Backbone.Model.extend({
 
     if (builds && builds.length > 0) {
       hasRunningBuild = builds.findWhere({status: 'testing'})
-      console.debug('build.status.hasRunning:', hasRunningBuild)
       if (hasRunningBuild) {
         projectStatus = Build.STATES.testing
       } else {

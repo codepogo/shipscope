@@ -24,16 +24,15 @@ var MainLayout = Backbone.Marionette.LayoutView.extend({
         if (this.initialized) return;
 
         this.initialized = true
+        // recreate backbone collection, they get lost in the intercom
         this.collection = new Projects(msg.data)
         this.onShowHome()
       }
 
       if (msg.type == 'options.set') {
-        console.debug('options.set:', msg.data)
         this.options = new OptionsModel(msg.data)
         App.options = msg.data
 
-        console.debug('this.options:', this.options)
         if (!this.options.get('api_key')) {
           this.onShowOptions()
         }
