@@ -48,6 +48,7 @@ module.exports = function(grunt) {
             'app/js/models/project.js',
             'app/js/collections/builds.js',
             'app/js/collections/projects.js',
+            'app/js/util/codeship_api.js',
             'app/js/util/background.js'
           ]
         }

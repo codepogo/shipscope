@@ -1,6 +1,7 @@
 var Projects = Backbone.Collection.extend({
   model: Project,
   apiKey: null,
+
   comparator: function(project) {
     if (project.getStatus().status == Build.STATES.testing) {
       return 0
