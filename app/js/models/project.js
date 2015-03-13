@@ -9,6 +9,12 @@ var Project = Backbone.Model.extend({
       hasRunningBuild,
       lastMasterBuild;
 
+    // we lose the backbone collection,
+    // init builds collection after passing to the frontend
+    if (Array.isArray(builds)) {
+      builds = new Builds(builds)
+    }
+
     if (builds && builds.length > 0) {
       hasRunningBuild = builds.findWhere({status: 'testing'})
       if (hasRunningBuild) {
