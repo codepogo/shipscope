@@ -6,6 +6,7 @@ var App = {
     }
   }
 }
+
 describe('Projects View', function() {
   'use strict'
 

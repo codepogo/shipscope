@@ -1,9 +1,21 @@
 var CodeshipApi = (function() {
   var
-    PROJECT_URL = "https://codeship.com/api/v2/projects.json",
-    BUILD_URL = "https://codeship.com/api/v2/projects.json",
+    API_HOST = "https://codeship.com/api",
+    PROJECT_URL = API_HOST + "/v2/projects.json",
+    BUILD_URL = API_HOST + "/v1/builds.json",
 
     options,
+
+    fetchAll = function(callback) {
+      fetchProjects(function(projects) {
+        projects.forEach(function(project) {
+          fetchBuilds(project, function(builds) {
+            project.set({builds: builds});
+            callback(projects)
+          })
+        })
+      })
+    },
 
     fetchBuilds = function(project, callback) {
       fetchApiKeyFromLocalStorage(function(){
@@ -51,6 +63,10 @@ var CodeshipApi = (function() {
 
     fetchBuilds: function(project, callback) {
       fetchBuilds(project, callback)
+    },
+    fetchAll: function(callback) {
+      fetchAll(callback)
     }
+
   }
 });

@@ -50,7 +50,7 @@ var Background = function() {
     },
 
     fetchProjectsFromCodeship = function() {
-      api.fetchProjects(function(_projects) {
+      api.fetchAll(function(_projects) {
         projects = _projects
         buildWatcher.scan(projects)
       })
@@ -82,7 +82,9 @@ var Background = function() {
 
     checkApiKey = function() {
       chrome.storage.sync.get('api_key', function(value) {
-        if (value) fetchProjectsFromCodeship()
+        if (value && value.api_key != undefined) {
+          fetchProjectsFromCodeship()
+        }
       });
     }
 

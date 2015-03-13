@@ -57,7 +57,7 @@ var BuildWatcher = (function() {
   return {
     scan: function(projects) {
       projects.forEach(function(project) {
-        api.fetchBuilds(project, function(builds){
+        api.fetchBuilds(project, function(builds) {
           builds.forEach(function(build) {
             if (build.status == 'testing') {
               isWatching[build.uuid] = build
