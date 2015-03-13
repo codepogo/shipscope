@@ -49,7 +49,7 @@ var BuildWatcher = (function() {
       chrome.notifications.create(build.uuid, options, onCreateNotification);
 
       isWatching[build.uuid].status = 'notifying'
-    },
+    }
 
   chrome.notifications.onClicked.addListener(onNotificationClicked)
   chrome.notifications.onClosed.addListener(onNotificationClosed)
