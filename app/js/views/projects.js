@@ -29,7 +29,7 @@ var ProjectsView = Backbone.Marionette.CollectionView.extend({
     App.intercom.onMessage.addListener(function(msg) {
       if (msg.type == 'projects.set') {
         this.switchToSlowPoller(msg.data)
-        if (this.collection) this.collection.reset(msg.data)
+        // if (this.collection) this.collection.reset(msg.data)
       }
     }.bind(this))
   },

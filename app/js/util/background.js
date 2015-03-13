@@ -49,10 +49,18 @@ var Background = function() {
       })
     },
 
+    fetchApiKeyFromLocalStorage = function(callback) {
+      chrome.storage.sync.get('api_key', function(value) {
+        options = value
+        callback()
+      });
+    }
+
     fetchProjectsFromCodeship = function() {
-      api.fetchAll(function(_projects) {
+      api.fetchAll(options, function(_projects) {
         projects = _projects
         buildWatcher.scan(projects)
+        getShipscopeSummary()
       })
     },
 
@@ -80,11 +88,10 @@ var Background = function() {
       setInterval(fetchProjectsFromCodeship, POLLING_INTERVAL);
     },
 
-    checkApiKey = function() {
+    fetchApiKeyFromLocalStorage = function() {
       chrome.storage.sync.get('api_key', function(value) {
-        if (value && value.api_key != undefined) {
-          fetchProjectsFromCodeship()
-        }
+        options = value
+        if (options) fetchProjectsFromCodeship()
       });
     }
 
@@ -92,7 +99,7 @@ var Background = function() {
     initialize: function() {
       buildWatcher = new BuildWatcher()
       initIntercom();
-      checkApiKey();
+      fetchApiKeyFromLocalStorage();
       initAnalyticsPing()
       startPolling();
     }
