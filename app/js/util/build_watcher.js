@@ -1,6 +1,7 @@
 var BuildWatcher = (function() {
   var
     isWatching = {},
+    api = new CodeshipApi()
 
     ellipsify = function(str, max) {
       if (str == null) return str
@@ -48,7 +49,7 @@ var BuildWatcher = (function() {
       chrome.notifications.create(build.uuid, options, onCreateNotification);
 
       isWatching[build.uuid].status = 'notifying'
-    }
+    },
 
   chrome.notifications.onClicked.addListener(onNotificationClicked)
   chrome.notifications.onClosed.addListener(onNotificationClosed)
@@ -56,12 +57,14 @@ var BuildWatcher = (function() {
   return {
     scan: function(projects) {
       projects.forEach(function(project) {
-        project.builds.forEach(function(build) {
-          if (build.status == 'testing') {
-            isWatching[build.uuid] = build
-          } else if (isWatching[build.uuid] && isWatching[build.uuid].status == 'testing') {
-            showNotification(project, build)
-          }
+        api.fetchBuilds(project, function(builds){
+          builds.forEach(function(build) {
+            if (build.status == 'testing') {
+              isWatching[build.uuid] = build
+            } else if (isWatching[build.uuid] && isWatching[build.uuid].status == 'testing') {
+              showNotification(project, build)
+            }
+          })
         })
       })
     },

@@ -2,6 +2,7 @@ var Background = function() {
   var
     POLLING_INTERVAL = 10000,
     ANALYTICS_INTERVAL = 60000,
+    api = new CodeshipApi(),
 
     buildWatcher,
     pollingInterval,
@@ -49,9 +50,10 @@ var Background = function() {
     },
 
     fetchProjectsFromCodeship = function() {
-      api = new CodeshipApi()
-      projects = api.fetchProjects()
-      buildWatcher.scan(projects)
+      api.fetchProjects(function(_projects) {
+        projects = _projects
+        buildWatcher.scan(projects)
+      })
     },
 
     getShipscopeSummary = function() {
@@ -76,12 +78,19 @@ var Background = function() {
 
     startPolling = function() {
       setInterval(fetchProjectsFromCodeship, POLLING_INTERVAL);
+    },
+
+    checkApiKey = function() {
+      chrome.storage.sync.get('api_key', function(value) {
+        if (value) fetchProjectsFromCodeship()
+      });
     }
 
   return {
     initialize: function() {
       buildWatcher = new BuildWatcher()
       initIntercom();
+      checkApiKey();
       initAnalyticsPing()
       startPolling();
     }
