@@ -36,6 +36,7 @@ module.exports = function(config) {
       'app/js/collections/builds.js',
       'app/js/collections/projects.js',
 
+      'app/js/util/codeship_api.js',
       'app/js/util/build_watcher.js',
       'app/js/views/*.js',
 
