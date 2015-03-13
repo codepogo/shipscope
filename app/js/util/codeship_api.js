@@ -10,7 +10,6 @@ var CodeshipApi = (function() {
       fetchProjects(function(projects) {
         projects.forEach(function(project) {
           fetchBuilds(project, function(builds) {
-            project.set({builds: builds});
             callback(projects)
           })
         })
@@ -24,11 +23,11 @@ var CodeshipApi = (function() {
         $.getJSON(BUILD_URL, params)
           .done( function(response) {
             builds_collection = new Builds(response.builds)
+            project.set({builds: builds});
             callback(builds_collection)
           })
           .fail(function(err) {
             ga('send', 'event', 'background', 'fetch_builds', 'error')
-            if (intercom) intercom.postMessage({type: 'error', data: err})
           });
       })
     },
