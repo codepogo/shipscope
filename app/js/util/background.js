@@ -49,10 +49,10 @@ var Background = function() {
       })
     },
 
-    fetchApiKeyFromLocalStorage = function(callback) {
+    fetchApiKeyFromLocalStorage = function() {
       chrome.storage.sync.get('api_key', function(value) {
         options = value
-        callback()
+        if (options) fetchProjectsFromCodeship()
       });
     }
 
@@ -87,13 +87,6 @@ var Background = function() {
     startPolling = function() {
       setInterval(fetchProjectsFromCodeship, POLLING_INTERVAL);
     },
-
-    fetchApiKeyFromLocalStorage = function() {
-      chrome.storage.sync.get('api_key', function(value) {
-        options = value
-        if (options) fetchProjectsFromCodeship()
-      });
-    }
 
   return {
     initialize: function() {
