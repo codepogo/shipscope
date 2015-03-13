@@ -70,7 +70,7 @@ var MainLayout = Backbone.Marionette.LayoutView.extend({
     $('footer').show();
 
     if (project) {
-      var builds = project.get('builds')
+      var builds = new Builds(project.get('builds'))
       var buildsView = new BuildsView({collection: builds}, {projectId: projectId})
       this.project_list.show(buildsView)
     }
