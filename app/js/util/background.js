@@ -54,7 +54,7 @@ var Background = function() {
         options = value
         if (options) fetchProjectsFromCodeship()
       });
-    }
+    },
 
     fetchProjectsFromCodeship = function() {
       api.fetchAll(options, function(_projects) {
@@ -86,7 +86,7 @@ var Background = function() {
 
     startPolling = function() {
       setInterval(fetchProjectsFromCodeship, POLLING_INTERVAL);
-    },
+    }
 
   return {
     initialize: function() {
