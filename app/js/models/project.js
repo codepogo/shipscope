@@ -3,14 +3,15 @@ var Project = Backbone.Model.extend({
 
   getStatus: function() {
     var
-      builds = new Builds(this.attributes.builds),
+      builds = this.attributes.builds,
       mostRecentBuilds = {},
       projectStatus = Build.STATES.success,
       hasRunningBuild,
       lastMasterBuild;
 
-    if (builds.length > 0) {
+    if (builds && builds.length > 0) {
       hasRunningBuild = builds.findWhere({status: 'testing'})
+      console.debug('build.status.hasRunning:', hasRunningBuild)
       if (hasRunningBuild) {
         projectStatus = Build.STATES.testing
       } else {
