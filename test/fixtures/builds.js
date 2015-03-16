@@ -52,7 +52,7 @@ var BuildFixtures = {
       "status": "error",
       "commit_id": "03aa27da48bf5d6ee5c162351a2d7f721cc1ad28",
       "message": "testing a codeship build",
-      "branch": "backbonify"
+      "branch": "master"
     }
   ]
 }
