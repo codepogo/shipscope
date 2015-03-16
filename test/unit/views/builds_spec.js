@@ -6,7 +6,8 @@ describe('Build View', function() {
 
   beforeEach(function() {
     project = new Project(ProjectFixtures.good)
-    builds = new Builds(project.attributes.builds)
+    builds = new Builds(BuildFixtures.good)
+    project.set({builds: builds})
     view = new BuildsView({collection: builds}, {projectId: project.id})
   })
 
@@ -25,7 +26,7 @@ describe('Build View', function() {
         type: 'click',
         currentTarget: {
           dataset: {
-            id: project.attributes.builds[0].id
+            id: project.attributes.builds.at(0).id
           }
         },
         preventDefault: function() {}

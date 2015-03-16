@@ -3,7 +3,9 @@ describe('Projects', function() {
   var projects, builds
 
   beforeEach(function() {
-    projects = new Projects([ProjectFixtures.good, ProjectFixtures.good2])
+    var project1 = new Project(ProjectFixtures.good),
+        project2 = new Project(ProjectFixtures.good2)
+    projects = new Projects([project1, project2])
     builds = new Builds(BuildFixtures.error)
 
     projects.each(function(project) {

@@ -5,6 +5,7 @@ describe('Project View', function() {
   var project, view
   beforeEach(function() {
     project = new Project(ProjectFixtures.good)
+    project.set({builds: new Builds(BuildFixtures.good)})
     view = new ProjectView({model: project})
   })
 
@@ -15,8 +16,9 @@ describe('Project View', function() {
 
       status.should.equal('success')
     })
+
     it('should provide the project status for a successful build', function() {
-      project.attributes.builds[0].status = 'stopped'
+      project.attributes.builds.at(0).attributes.status = 'stopped'
       var p = view.serializeData()
       var status = view.templateHelpers.getStatus.bind(p)()
 
@@ -24,8 +26,8 @@ describe('Project View', function() {
     })
 
     it('should provide the project status for a successful build', function() {
-      project.attributes.builds[0].status = 'error'
-      project.attributes.builds[0].branch = 'master'
+      project.attributes.builds.at(0).attributes.status = 'error'
+      project.attributes.builds.at(0).attributes.branch = 'master'
       var p = view.serializeData()
       var status = view.templateHelpers.getStatus.bind(p)()
 
@@ -33,8 +35,8 @@ describe('Project View', function() {
     })
 
     it('should provide the project status for a successful build', function() {
-      project.attributes.builds[0].status = 'testing'
-      project.attributes.builds[0].branch = 'master'
+      project.attributes.builds.at(0).attributes.status = 'testing'
+      project.attributes.builds.at(0).attributes.branch = 'master'
       var p = view.serializeData()
       var status = view.templateHelpers.getStatus.bind(p)()
 
