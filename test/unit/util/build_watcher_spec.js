@@ -29,15 +29,17 @@ describe('BuildWatcher', function() {
   })
 
   it('remembers builds that are testing', function() {
-    buildsCollection = new Builds(BuildFixtures.testing)
-    projectsCollection = new Projects([project1, project2])
+    var builds1 = new Builds(BuildFixtures.testing),
+        builds2 = new Builds(BuildFixtures.error),
+        project1 = new Project({builds: builds1}),
+        project2 = new Project({builds: builds2}),
+        projectsCollection = new Projects([project1, project2])
 
-    projectsCollection.each(function(project) {
-      project.set({builds: buildsCollection})
-    })
+    project1.set({builds: builds1})
+    project2.set({builds: builds2})
 
     watcher.scan(projectsCollection)
-    watcher.getWatchList().should.eql({"2f406670-007f-0132-cb2f-5247614ee66f": new Build(BuildFixtures.testing[0]}))
+    watcher.getWatchList().should.include.keys("2f406670-007f-0132-cb2f-5247614ee66f")
   })
 
   describe('notifications', function() {
@@ -58,7 +60,7 @@ describe('BuildWatcher', function() {
         title: "shipscope",
         message: 'success',
         priority: 1,
-        iconUrl: "img/shipscope_icon48.png"
+        iconUrl: "img/shipscope_icon_stopped_128.png"
       }
 
       sinon.spy(chrome.notifications, 'create')
@@ -70,9 +72,8 @@ describe('BuildWatcher', function() {
 
     it('creates a notification when a build succeeds', function() {
       watcher.scan(projectsCollection)
-      watcher.getWatchList().should.eql({"2f406670-007f-0132-cb2f-5247614ee66f": projects[1].builds[0]})
 
-      projectsCollection.at(1).get('builds').at(0).status = 'success'
+      projectsCollection.at(1).get('builds').at(0).set({status: 'success'})
       watcher.scan(projectsCollection)
 
       chrome.notifications.create.calledOnce.should.be.true
@@ -80,35 +81,38 @@ describe('BuildWatcher', function() {
 
     it('creates a notification when a build fails', function() {
       watcher.scan(projectsCollection)
-      watcher.getWatchList().should.eql({"2f406670-007f-0132-cb2f-5247614ee66f": ProjectFixtures.testing.builds[0]})
+      projectsCollection.at(1).get('builds').at(0).set({status: 'error'})
 
-      projectsCollection.at(1).get('builds').at(0).status = 'error'
       watcher.scan(projectsCollection)
-
-      chrome.notifications.create.calledWithExactly(null, alertOptions )
+      chrome.notifications.create.calledWith(null, alertOptions)
       chrome.notifications.create.calledOnce.should.be.true
     })
 
     it('stops watching a build after the notification has been sent', function() {
       watcher.scan(projectsCollection)
-      watcher.getWatchList().should.eql({"2f406670-007f-0132-cb2f-5247614ee66f": projects[1].builds[0]})
 
-      projectsCollection.at(1).get('builds').at(0).status = 'success'
+      projectsCollection.at(1).get('builds').at(0).set({status: 'success'})
       watcher.scan(projectsCollection)
-      projectsCollection.at(1).get('builds').at(0).status = 'notifying'
-      watcher.getWatchList().should.eql({"2f406670-007f-0132-cb2f-5247614ee66f": projectsCollection.at(0).get('builds').at(0)})
+      projectsCollection.at(1).get('builds').at(0).set({status: 'notifying'})
+      watcher.getWatchList().should.include.keys("2f406670-007f-0132-cb2f-5247614ee66f")
     })
 
     it('creates a notification when a build is stopped', function() {
-      var testingBuild = projectsCollection.at(1).get('builds').at(0)
+      var uuid = BuildFixtures.testing[0].uuid,
+          watchList,
+          call,
+          testingBuild = projectsCollection.at(1).get('builds').at(0)
+
       watcher.scan(projectsCollection)
-      watcher.getWatchList().should.eql({"2f406670-007f-0132-cb2f-5247614ee66f": testingBuild})
+      watchList = watcher.getWatchList()
+      watchList[uuid].should.not.be.null
 
       testingBuild.attributes.status = 'stopped'
       watcher.scan(projectsCollection)
 
-      chrome.notifications.create.calledWithExactly(null, alertOptions).should.be.true
       chrome.notifications.create.calledOnce.should.be.true
+      uuid.should.eql(chrome.notifications.create.args[0][0])
+
     })
   })
 })

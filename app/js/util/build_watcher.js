@@ -48,7 +48,7 @@ var BuildWatcher = (function() {
 
       chrome.notifications.create(build.get('uuid'), options, onCreateNotification);
 
-      isWatching[build.get('uuid')].status = 'notifying'
+      isWatching[build.get('uuid')].set({status: 'notifying'})
     }
 
   chrome.notifications.onClicked.addListener(onNotificationClicked)
@@ -62,7 +62,7 @@ var BuildWatcher = (function() {
               status = build.get('status')
 
           if (status == 'testing') {
-            isWatching[uuid] = status
+            isWatching[uuid] = build.clone()
           } else if (isWatching[uuid] && isWatching[uuid].get('status') == 'testing') {
             showNotification(project, build)
           }
