@@ -4,15 +4,8 @@ describe('Build View', function() {
   var build, view
 
   beforeEach(function() {
-    // var parent = document.createElement('div')
-    // parent.id = 'build_item'
-    // document.body.appendChild(parent)
-    // console.debug(document.body)
-    //
-
-    build = new Build(ProjectFixtures.good.builds[0])
+    build = new Build(BuildFixtures.good[0])
     view = new BuildView({model: build, projectId: 12345})
-    // view.render()
   })
 
   it('should set the projectId on the view when initializing', function() {
@@ -49,11 +42,4 @@ describe('Build View', function() {
       helper.getStatusIcon.bind(build.attributes)().should.equal('info')
     })
   })
-
-  // it('should render when the status of a build changes', function() {
-  //   sinon.stub(view, 'onStatusChange')
-  //   build.set({status: 'testing'})
-  //
-  //   view.onStatusChange.calledOnce.should.be.true
-  // })
 })

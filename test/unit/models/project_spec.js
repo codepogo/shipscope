@@ -24,7 +24,8 @@ describe('Project', function() {
     })
 
     it('should summarize a bad build', function() {
-      project = new Project(ProjectFixtures.bad)
+      project = new Project(ProjectFixtures.good)
+      project.set({builds: new Builds(BuildFixtures.error)})
       var status = project.getStatus()
       status.should.have.property('status', Build.STATES.error)
     })

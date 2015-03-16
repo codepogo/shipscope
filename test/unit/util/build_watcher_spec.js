@@ -1,6 +1,6 @@
 describe('BuildWatcher', function() {
   'use strict'
-  var watcher, projects
+  var watcher, projects, buildsCollection, projectsCollection, project1, project2
 
   before(function() {
     chrome = {
@@ -17,30 +17,51 @@ describe('BuildWatcher', function() {
   })
 
   it('ignores any builds that are not testing', function() {
-    projects = [ProjectFixtures.good, ProjectFixtures.good2]
-    watcher.scan(projects)
+    buildsCollection = new Builds(BuildFixtures.good)
+    projectsCollection = new Projects([ProjectFixtures.good, ProjectFixtures.good2])
+
+    projectsCollection.each(function(project) {
+      project.set({builds: buildsCollection})
+    })
+
+    watcher.scan(projectsCollection)
     watcher.getWatchList().should.eql({})
   })
 
   it('remembers builds that are testing', function() {
-    projects = [ProjectFixtures.good, ProjectFixtures.testing]
-    watcher.scan(projects)
-    watcher.getWatchList().should.eql({"2f406670-007f-0132-cb2f-5247614ee66f": ProjectFixtures.testing.builds[0]})
+    var builds1 = new Builds(BuildFixtures.testing),
+        builds2 = new Builds(BuildFixtures.error),
+        project1 = new Project({builds: builds1}),
+        project2 = new Project({builds: builds2}),
+        projectsCollection = new Projects([project1, project2])
+
+    project1.set({builds: builds1})
+    project2.set({builds: builds2})
+
+    watcher.scan(projectsCollection)
+    watcher.getWatchList().should.include.keys("2f406670-007f-0132-cb2f-5247614ee66f")
   })
 
   describe('notifications', function() {
     var alertOptions
 
     beforeEach(function() {
-      projects = [ProjectFixtures.good, ProjectFixtures.testing]
+      buildsCollection = new Builds(BuildFixtures.testing)
+      project1 = new Project(ProjectFixtures.good).set({builds: buildsCollection})
+      project2 = new Project(ProjectFixtures.good2).set({builds: buildsCollection})
+      projectsCollection = new Projects([project1, project2])
+
+      projectsCollection.each(function(project) {
+        project.set({builds: buildsCollection})
+      })
+
       alertOptions = {
         type: "basic",
         title: "shipscope",
         message: 'success',
         priority: 1,
-        iconUrl: "img/shipscope_icon48.png"
+        iconUrl: "img/shipscope_icon_stopped_128.png"
       }
-      projects[1].builds[0].status = 'testing'
 
       sinon.spy(chrome.notifications, 'create')
     })
@@ -50,45 +71,48 @@ describe('BuildWatcher', function() {
     })
 
     it('creates a notification when a build succeeds', function() {
-      watcher.scan(projects)
-      watcher.getWatchList().should.eql({"2f406670-007f-0132-cb2f-5247614ee66f": projects[1].builds[0]})
+      watcher.scan(projectsCollection)
 
-      projects[1].builds[0].status = 'success'
-      watcher.scan(projects)
+      projectsCollection.at(1).get('builds').at(0).set({status: 'success'})
+      watcher.scan(projectsCollection)
 
       chrome.notifications.create.calledOnce.should.be.true
     })
 
     it('creates a notification when a build fails', function() {
-      watcher.scan(projects)
-      watcher.getWatchList().should.eql({"2f406670-007f-0132-cb2f-5247614ee66f": ProjectFixtures.testing.builds[0]})
+      watcher.scan(projectsCollection)
+      projectsCollection.at(1).get('builds').at(0).set({status: 'error'})
 
-      projects[1].builds[0].status = 'error'
-      watcher.scan(projects)
-
-      chrome.notifications.create.calledWithExactly(null, alertOptions )
+      watcher.scan(projectsCollection)
+      chrome.notifications.create.calledWith(null, alertOptions)
       chrome.notifications.create.calledOnce.should.be.true
     })
 
     it('stops watching a build after the notification has been sent', function() {
-      watcher.scan(projects)
-      watcher.getWatchList().should.eql({"2f406670-007f-0132-cb2f-5247614ee66f": projects[1].builds[0]})
+      watcher.scan(projectsCollection)
 
-      projects[1].builds[0].status = 'success'
-      watcher.scan(projects)
-      projects[1].builds[0].status = 'notifying'
-      watcher.getWatchList().should.eql({"2f406670-007f-0132-cb2f-5247614ee66f": projects[1].builds[0]})
+      projectsCollection.at(1).get('builds').at(0).set({status: 'success'})
+      watcher.scan(projectsCollection)
+      projectsCollection.at(1).get('builds').at(0).set({status: 'notifying'})
+      watcher.getWatchList().should.include.keys("2f406670-007f-0132-cb2f-5247614ee66f")
     })
 
     it('creates a notification when a build is stopped', function() {
-      watcher.scan(projects)
-      watcher.getWatchList().should.eql({"2f406670-007f-0132-cb2f-5247614ee66f": ProjectFixtures.testing.builds[0]})
+      var uuid = BuildFixtures.testing[0].uuid,
+          watchList,
+          call,
+          testingBuild = projectsCollection.at(1).get('builds').at(0)
 
-      projects[1].builds[0].status = 'stopped'
-      watcher.scan(projects)
+      watcher.scan(projectsCollection)
+      watchList = watcher.getWatchList()
+      watchList[uuid].should.not.be.null
 
-      chrome.notifications.create.calledWithExactly(null, alertOptions)
+      testingBuild.attributes.status = 'stopped'
+      watcher.scan(projectsCollection)
+
       chrome.notifications.create.calledOnce.should.be.true
+      uuid.should.eql(chrome.notifications.create.args[0][0])
+
     })
   })
 })

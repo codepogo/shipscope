@@ -24,12 +24,12 @@ var MainLayout = Backbone.Marionette.LayoutView.extend({
         if (this.initialized) return;
 
         this.initialized = true
-        this.collection = new Projects(msg.data);
+        // recreate backbone collection, they get lost in the intercom
+        this.collection = new Projects(msg.data)
         this.onShowHome()
       }
 
       if (msg.type == 'options.set') {
-        console.debug('options.set:', msg.data)
         this.options = new OptionsModel(msg.data)
         App.options = msg.data
 
@@ -70,9 +70,9 @@ var MainLayout = Backbone.Marionette.LayoutView.extend({
     $('footer').show();
 
     if (project) {
-      var builds = new Builds(project.get('builds'));
-      var buildsView = new BuildsView({collection: builds}, {projectId: projectId});
-      this.project_list.show(buildsView);
+      var builds = new Builds(project.get('builds'))
+      var buildsView = new BuildsView({collection: builds}, {projectId: projectId})
+      this.project_list.show(buildsView)
     }
   },
 

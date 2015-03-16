@@ -1,6 +1,7 @@
 var BuildWatcher = (function() {
   var
     isWatching = {},
+    api = new CodeshipApi()
 
     ellipsify = function(str, max) {
       if (str == null) return str
@@ -26,7 +27,7 @@ var BuildWatcher = (function() {
     onNotificationClicked = function(notificationId) {
       var build = isWatching[notificationId]
       if (build) {
-        chrome.tabs.create({url: 'https://codeship.com/projects/' + build.project_id + '/builds/' + build.id})
+        chrome.tabs.create({url: 'https://codeship.com/projects/' + build.get('project_id') + '/builds/' + build.get('id')})
         clearNotification(notificationId)
       } else console.debug('could not find build for notificationId:', notificationId)
     },
@@ -36,18 +37,18 @@ var BuildWatcher = (function() {
     },
 
     showNotification = function(project, build) {
-      var msg= '[' + ellipsify(build.branch, 20) + '] ' + build.status + '\n' + ellipsify(build.message, 30),
+      var msg= '[' + ellipsify(build.get('branch'), 20) + '] ' + build.get('status') + '\n' + ellipsify(build.get('message'), 30),
           options = {
             type: "basic",
-            title: project.repository_name,
+            title: project.get('repository_name'),
             message: msg,
             priority: 1,
-            iconUrl: "img/shipscope_icon_" + build.status + "_128.png"
+            iconUrl: "img/shipscope_icon_" + build.get('status') + "_128.png"
           }
 
-      chrome.notifications.create(build.uuid, options, onCreateNotification);
+      chrome.notifications.create(build.get('uuid'), options, onCreateNotification);
 
-      isWatching[build.uuid].status = 'notifying'
+      isWatching[build.get('uuid')].set({status: 'notifying'})
     }
 
   chrome.notifications.onClicked.addListener(onNotificationClicked)
@@ -56,10 +57,13 @@ var BuildWatcher = (function() {
   return {
     scan: function(projects) {
       projects.forEach(function(project) {
-        project.builds.forEach(function(build) {
-          if (build.status == 'testing') {
-            isWatching[build.uuid] = build
-          } else if (isWatching[build.uuid] && isWatching[build.uuid].status == 'testing') {
+        project.get('builds').forEach(function(build) {
+          var uuid = build.get('uuid'),
+              status = build.get('status')
+
+          if (status == 'testing') {
+            isWatching[uuid] = build.clone()
+          } else if (isWatching[uuid] && isWatching[uuid].get('status') == 'testing') {
             showNotification(project, build)
           }
         })
