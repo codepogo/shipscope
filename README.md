@@ -1,6 +1,7 @@
 # Shipscope
 
-Shipscope is a Chrome browser extension that monitors your projects on [Codeship](https://codeship.com). It provides the following features:
+
+Shipscope was a Chrome browser extension that monitors your projects on [Codeship](https://codeship.com). It provides the following features:
 
 * Shipscope presents a popup containing all of your projects.
 * The status of each project’s master branch is indicated next to the project name. 
@@ -9,7 +10,6 @@ Shipscope is a Chrome browser extension that monitors your projects on [Codeship
 * If a build is running, you see a little spinny thing. That never gets boring.
 * If a build has completed, you can restart it and get that spinny thing going again!
 
-Install it from the [Chrome Web Store](https://chrome.google.com/webstore/detail/shipscope/jdedmgopefelimgjceagffkeeiknclhh?hl=en). Please leave reviews and suggestions in the store.
 
 ---
 
